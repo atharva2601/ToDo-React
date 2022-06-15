@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { signInWithEmailAndPassword, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import './home.css';
 
 const Home = () => {
     
@@ -60,7 +61,7 @@ const Home = () => {
                     <input type="email" placeholder='Email' value={accountInfo.email} onChange={(mail) => setAccountInfo({...accountInfo, email: mail.target.value})} />
                     <input type="password" placeholder='Password' value={accountInfo.password} onChange={(mail) => setAccountInfo({...accountInfo, password: mail.target.value})} />
                     <input type="password" placeholder='Confirm Password' value={accountInfo.confirmPassword} onChange={(mail) => setAccountInfo({...accountInfo, confirmPassword: mail.target.value})} />
-                    <button onClick={handleCreate} >Sign Up</button>
+                    <button className='signin' onClick={handleCreate} >Sign Up</button>
                     <button onClick={() => setCreatingAccount(false)} >Go Back</button>
                     </>
                 ) : 
@@ -68,8 +69,8 @@ const Home = () => {
                     <>
                         <input type="email" placeholder='Email' onChange={handleEmailChange} value={email} />
                         <input type="password" placeholder='Password' onChange={handlePasswordChange} value={password} />
-                        <button onClick={handleSignIn} >Sign In</button>
-                        <button onClick={() => setCreatingAccount(true)} >Sign Up</button>
+                        <button className='signin' onClick={handleSignIn} >Sign In</button>
+                        <button className='signup' onClick={() => setCreatingAccount(true)} >Sign Up</button>
                     </>
                 )
                 }

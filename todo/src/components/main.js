@@ -4,6 +4,10 @@ import { auth, db } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { set, ref, onValue, remove, update } from "firebase/database";
 import {uid} from 'uid';
+import './main.css';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const Main = () => {
@@ -69,30 +73,31 @@ const Main = () => {
         });
 
         setTask("");
+        setEdit(false);
     };
 
     return (
-        <div>
-            <input type="text" placeholder="Add Task to Perform" value={task} onChange= {(t) => setTask(t.target.value)} />
+        <div className="main" >
+            <input className="input" type="text" placeholder="Add Task to Perform" value={task} onChange= {(t) => setTask(t.target.value)} />
             {tasks.map((task) => (
-                <div>
+                <div className="task">
                     <h5>{task.task}</h5>
-                    <button onClick={() => handleEdit(task)} >Edit</button>
-                    <button onClick={() => handleDelete(task.uidd) } >Delete</button>
+                    <EditIcon onClick={() => handleEdit(task)} className="edit" />
+                    <DeleteIcon onClick={() => handleDelete(task.uidd)} className="delete" />
                 </div>
             ))}
             {/* <button onClick={write} >Add</button> */}
 
             {edit ? (
                 <div>
-                    <button onClick={handleEditConf} >Confirm</button>
+                    <button onClick={handleEditConf} className="add" >Confirm</button>
                 </div>
             ) : ( 
                 <div>
-                    <button onClick={write} >Add</button>
+                    <AddIcon onClick={write} className="add" />
                 </div>
             )}
-            <button onClick={handleSignOut} >Sign Out</button>
+            <button className="signout" onClick={handleSignOut} >Sign Out</button>
         </div>
     );
 };

@@ -1,0 +1,60 @@
+.main {
+    height: 100vh;
+    weight: 100vw;
+    background: linear-gradient(122.19deg, ivory 1.89%, grey 113.56%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .input {
+    position: absolute;
+    top: 20px;
+    outline: none;
+    border: none;
+    height: 30px;
+    font-size: 25px;
+    padding: 5px 20px;
+    background-color: black;
+    color: white;
+  }
+  
+  .add {
+    position: absolute;
+    transform: scale(2);
+    top: 27px;
+    right: 470px;
+    cursor: pointer;
+  }
+  
+  .task {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+  
+  .task > h1 {
+    width: 500px;
+    background-color: rgb(211, 211, 211);
+    padding: 5px 10px;
+  }
+  
+  .edit,
+  .delete {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .signout {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 10px;
+    background: linear-gradient(122.19deg, blue 1.89%, black 113.56%);
+    color: white;
+  }
