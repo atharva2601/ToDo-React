@@ -8,6 +8,7 @@ import './main.css';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DoneSharpIcon from '@mui/icons-material/DoneSharp';
 
 
 const Main = () => {
@@ -29,6 +30,7 @@ const Main = () => {
                         Object.values(data).map((task) => {
                             setTasks((oldArray) => [...oldArray, task]);
                         });
+                    console.log(data);
                     }
                 })
             }
@@ -51,13 +53,11 @@ const Main = () => {
         set(ref(db, `/${auth.currentUser.uid}/${uidd}`), {
             task: task,
             uidd: uidd,
+            status: 'pending',
+            createdTime: Date.now()
         });
 
         setTask("");
-    };
-
-    const handleDelete = (uid) => {
-        remove(ref(db, `/${auth.currentUser.uid}/${uid}`));
     };
 
     const handleEdit = (task) => {
@@ -66,37 +66,60 @@ const Main = () => {
         setTemUidd(task.uidd)
     };
 
-    const handleEditConf = () => {
-        update(ref(db, `/${auth.currentUser.uid}/${temUidd}`), {
+    const handleEditConf = (uid) => {
+        update(ref(db, `/${auth.currentUser.uid}/${uid}`), {
             task: task,
-            temUidd: temUidd
         });
+
+        console.log(uid);
 
         setTask("");
         setEdit(false);
     };
 
+    const handleStatus = (id, status) => {
+        // setTextDec('line-through');
+        
+        if (status=='completed') {
+            update(ref(db, `/${auth.currentUser.uid}/${id}`), {
+                status: 'pending',
+            });
+          } else if(status=='pending') {
+            update(ref(db, `/${auth.currentUser.uid}/${id}`), {
+                status: 'completed',
+            });
+          }
+          else{
+            update(ref(db, `/${auth.currentUser.uid}/${id}`), {
+                status: 'deleted',
+            });
+          }
+      };
+
     return (
         <div className="main" >
             <input className="input" type="text" placeholder="Add Task to Perform" value={task} onChange= {(t) => setTask(t.target.value)} />
             {tasks.map((task) => (
-                <div className="task">
-                    <h5>{task.task}</h5>
+            <div>
+                {task.status!='deleted' && <div className="task">
+                    <h5 style={{textDecoration: task.status=='completed'? "line-through":"none" }}>{task.task}</h5>
                     <EditIcon onClick={() => handleEdit(task)} className="edit" />
-                    <DeleteIcon onClick={() => handleDelete(task.uidd)} className="delete" />
-                </div>
+                    <DeleteIcon onClick={() => handleStatus(task.uidd, 'deleted')} className="delete" />
+                    <DoneSharpIcon onClick={() => handleStatus(task.uidd, task.status) } className="complete" />
+                </div>}
+                
+                {edit && (
+                    <div style={{marginLeft: '720px'}} >
+                        <button onClick={() => handleEditConf(task.uidd)} className="confirm" >Confirm</button>
+                    </div>
+                ) }
+            </div>
             ))}
-            {/* <button onClick={write} >Add</button> */}
+                   {!edit && ( <div> 
+                        <AddIcon onClick={write} className="add" />
+                    </div>)}
 
-            {edit ? (
-                <div>
-                    <button onClick={handleEditConf} className="add" >Confirm</button>
-                </div>
-            ) : ( 
-                <div>
-                    <AddIcon onClick={write} className="add" />
-                </div>
-            )}
+                
             <button className="signout" onClick={handleSignOut} >Sign Out</button>
         </div>
     );

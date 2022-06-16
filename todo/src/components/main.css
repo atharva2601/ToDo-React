@@ -44,7 +44,7 @@
   }
   
   .edit,
-  .delete {
+  .delete, .complete {
     cursor: pointer;
     margin-left: 10px;
   }
@@ -57,4 +57,16 @@
     padding: 10px;
     background: linear-gradient(122.19deg, blue 1.89%, black 113.56%);
     color: white;
+  }
+
+  .line {
+    text-decoration: line-through;
+  }
+
+  .confirm {
+    position: absolute;
+    transform: scale(2);
+    top: 30px;
+    right: 400px;
+    cursor: pointer;
   }
