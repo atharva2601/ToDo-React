@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
-import { NavLink,Link ,useHistory} from 'react-router-dom';
-import { set, ref, onValue, update } from "firebase/database";
+import { NavLink} from 'react-router-dom';
+import {ref, onValue} from "firebase/database";
+import './recycle-bin.css';
+import RestorePageIcon from '@mui/icons-material/RestorePage';
 
 const Recycle = () => {
     const [tasks, setTasks ] = useState([]);
@@ -27,31 +28,25 @@ const Recycle = () => {
 
     return (
         <div className="main" >
+            <h1 className="head">Deleted Tasks</h1>
             {tasks.map((task) => (
             <div>
                 {
-                    task.status=='deleted' && 
+                    task.status === 'deleted' && 
                         <div className="task">
                             <h5 style={{textDecoration: task.status === 'completed'? "line-through":"none" }}>{task.task}</h5>
+                            <RestorePageIcon />
                         </div>
                 }
-            
-            
-
-        </div>
-            )
-        
-             )}
-             <NavLink  to={`/main`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
+            </div>
+            ))}
+             
+            <NavLink  to={`/main`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
                 <div>
                     Go back
                 </div>
             </NavLink>
-             </div>
-           
-             )
+        </div>       
+    )
 };
-
- 
-
 export default Recycle;

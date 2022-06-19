@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { NavLink,Link ,useHistory} from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { set, ref, onValue, update } from "firebase/database";
 import {uid} from 'uid';
 import './main.css';
-import Recycle from "./recycle-bin";
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoneSharpIcon from '@mui/icons-material/DoneSharp';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
 
 // time, recycyle bin (deleted task), restore task 
   

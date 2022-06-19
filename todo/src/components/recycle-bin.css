@@ -1,0 +1,36 @@
+.main {
+    height: 100vh;
+    weight: 100vw;
+    background: linear-gradient(122.19deg, grey 1.89%, white 113.56%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .input {
+    position: absolute;
+    top: 20px;
+    outline: none;
+    border: none;
+    height: 30px;
+    font-size: 25px;
+    padding: 5px 20px;
+    background-color: black;
+    color: white;
+  }
+  
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+  
+  .task > h1 {
+    width: 500px;
+    background-color: rgb(211, 211, 211);
+    padding: 5px 10px;
+  }
