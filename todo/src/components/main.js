@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { NavLink,Link ,useHistory} from 'react-router-dom';
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { set, ref, onValue, remove, update } from "firebase/database";
+import { set, ref, onValue, update } from "firebase/database";
 import {uid} from 'uid';
 import './main.css';
+import Recycle from "./recycle-bin";
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoneSharpIcon from '@mui/icons-material/DoneSharp';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
+// time, recycyle bin (deleted task), restore task 
+  
 const Main = () => {
     const [task, setTask] = useState("");
     const [tasks, setTasks ] = useState([]);
@@ -39,6 +44,22 @@ const Main = () => {
             }
         });
     }, []);
+
+    // const Recycle = () => {
+    //     const nav = useNavigate();
+
+    //     useEffect(() => {
+    //         nav("/main/recycle");
+    //     })
+        
+    //     return (
+    //         <div>
+    //             <h1>test</h1>
+    //         </div>
+    //     );
+    // };
+
+    
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
@@ -80,11 +101,11 @@ const Main = () => {
     const handleStatus = (id, status) => {
         // setTextDec('line-through');
         
-        if (status=='completed') {
+        if (status==='completed') {
             update(ref(db, `/${auth.currentUser.uid}/${id}`), {
                 status: 'pending',
             });
-          } else if(status=='pending') {
+          } else if(status==='pending') {
             update(ref(db, `/${auth.currentUser.uid}/${id}`), {
                 status: 'completed',
             });
@@ -101,12 +122,15 @@ const Main = () => {
             <input className="input" type="text" placeholder="Add Task to Perform" value={task} onChange= {(t) => setTask(t.target.value)} />
             {tasks.map((task) => (
             <div>
-                {task.status!='deleted' && <div className="task">
-                    <h5 style={{textDecoration: task.status=='completed'? "line-through":"none" }}>{task.task}</h5>
-                    <EditIcon onClick={() => handleEdit(task)} className="edit" />
-                    <DeleteIcon onClick={() => handleStatus(task.uidd, 'deleted')} className="delete" />
-                    <DoneSharpIcon onClick={() => handleStatus(task.uidd, task.status) } className="complete" />
-                </div>}
+                {
+                    task.status!=='deleted' && 
+                        <div className="task">
+                            <h5 style={{textDecoration: task.status === 'completed'? "line-through":"none" }}>{task.task}</h5>
+                            <EditIcon onClick={() => handleEdit(task)} className="edit" />
+                            <DeleteIcon onClick={() => handleStatus(task.uidd, 'deleted')} className="delete" />
+                            <DoneSharpIcon onClick={() => handleStatus(task.uidd, task.status) } className="complete" />
+                        </div>
+                }
                 
                 {edit && (
                     <div style={{marginLeft: '720px'}} >
@@ -121,6 +145,11 @@ const Main = () => {
 
                 
             <button className="signout" onClick={handleSignOut} >Sign Out</button>
+            <NavLink  to={`/main/recycle`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
+                <DeleteForeverIcon className="recycleb" />
+            </NavLink>
+
+
         </div>
     );
 };

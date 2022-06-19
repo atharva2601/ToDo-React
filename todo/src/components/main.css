@@ -1,7 +1,7 @@
 .main {
     height: 100vh;
     weight: 100vw;
-    background: linear-gradient(122.19deg, ivory 1.89%, grey 113.56%);
+    background: linear-gradient(122.19deg, grey 1.89%, white 113.56%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,5 +68,14 @@
     transform: scale(2);
     top: 30px;
     right: 400px;
+    cursor: pointer;
+  }
+
+  .recycleb {
+    top: 600px;
+    right: 1300px;
+    padding: 10px;
+    background: linear-gradient(122.19deg,black 1.89%, blue  113.56%);
+    color: white;
     cursor: pointer;
   }
