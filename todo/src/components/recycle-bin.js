@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../utils/firebase";
 import { NavLink} from 'react-router-dom';
-import {ref, onValue} from "firebase/database";
+import { ref, onValue, update} from "firebase/database";
 import './recycle-bin.css';
 import RestorePageIcon from '@mui/icons-material/RestorePage';
 
 const Recycle = () => {
+    const [setTask] = useState("");
     const [tasks, setTasks ] = useState([]);
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -18,13 +19,23 @@ const Recycle = () => {
                         Object.values(data).map((task) => {
                             setTasks((oldArray) => [...oldArray, task]);
                         });
-                    console.log(data);
                     }
                 })
             }
         });
     }, []);
 
+    const handleRestore = (task) => {
+        // console.log(id,status);
+        if (task.status==='deleted') {
+            
+            update(ref(db, `/${auth.currentUser.uid}/${task.uidd}`), {
+                status: 'pending',
+            });
+        }
+
+        setTask("");
+    };
 
     return (
         <div className="main" >
@@ -35,16 +46,14 @@ const Recycle = () => {
                     task.status === 'deleted' && 
                         <div className="task">
                             <h5 style={{textDecoration: task.status === 'completed'? "line-through":"none" }}>{task.task}</h5>
-                            <RestorePageIcon />
+                            <RestorePageIcon onClick={() => handleRestore(task)} />
                         </div>
                 }
             </div>
             ))}
              
             <NavLink  to={`/main`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
-                <div>
-                    Go back
-                </div>
+                <button>Go Back</button>
             </NavLink>
         </div>       
     )

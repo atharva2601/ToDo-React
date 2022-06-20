@@ -43,22 +43,6 @@ const Main = () => {
         });
     }, []);
 
-    // const Recycle = () => {
-    //     const nav = useNavigate();
-
-    //     useEffect(() => {
-    //         nav("/main/recycle");
-    //     })
-        
-    //     return (
-    //         <div>
-    //             <h1>test</h1>
-    //         </div>
-    //     );
-    // };
-
-    
-
     const handleSignOut = () => {
         signOut(auth).then(() => {
             nav("/");
@@ -127,6 +111,7 @@ const Main = () => {
                             <EditIcon onClick={() => handleEdit(task)} className="edit" />
                             <DeleteIcon onClick={() => handleStatus(task.uidd, 'deleted')} className="delete" />
                             <DoneSharpIcon onClick={() => handleStatus(task.uidd, task.status) } className="complete" />
+                            <h5>{(Date.now())}</h5>
                         </div>
                 }
                 
@@ -140,7 +125,6 @@ const Main = () => {
                    {!edit && ( <div> 
                         <AddIcon onClick={write} className="add" />
                     </div>)}
-
                 
             <button className="signout" onClick={handleSignOut} >Sign Out</button>
             <NavLink  to={`/main/recycle`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
