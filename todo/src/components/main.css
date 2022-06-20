@@ -1,7 +1,8 @@
 .main {
     height: 100vh;
     weight: 100vw;
-    background: linear-gradient(122.19deg, grey 1.89%, white 113.56%);
+    background: rgb(9,9,121);
+    background: linear-gradient(90deg, rgba(9,9,121,1) 13%, rgba(0,212,255,1) 63%, rgba(0,36,35,1) 96%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,15 +13,18 @@
   .input {
     position: absolute;
     top: 20px;
+    color: white;
+    font-weight: bold;
+    background: transparent;
     outline: none;
     border: none;
     height: 30px;
     font-size: 25px;
     padding: 5px 20px;
-    background-color: black;
-    color: white;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+    border-bottom: 4px solid black;
   }
-  
+
   .add {
     position: absolute;
     transform: scale(2);
@@ -55,7 +59,8 @@
     top: 20px;
     right: 10px;
     padding: 10px;
-    background: linear-gradient(122.19deg, blue 1.89%, black 113.56%);
+    border-radius: 100px;
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
     color: white;
   }
 
@@ -72,10 +77,9 @@
   }
 
   .recycleb {
+    /* font-size: large; */
+    cursor: pointer;
     top: 600px;
     right: 1300px;
-    padding: 10px;
-    background: linear-gradient(122.19deg,black 1.89%, blue  113.56%);
-    color: white;
-    cursor: pointer;
+    position: absolute;
   }

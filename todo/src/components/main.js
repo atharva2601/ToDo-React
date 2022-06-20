@@ -10,7 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoneSharpIcon from '@mui/icons-material/DoneSharp';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import FolderDeleteTwoToneIcon from '@mui/icons-material/FolderDeleteTwoTone';
 
 // time, recycyle bin (deleted task), restore task 
   
@@ -128,7 +128,7 @@ const Main = () => {
                 
             <button className="signout" onClick={handleSignOut} >Sign Out</button>
             <NavLink  to={`/main/recycle`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
-                <DeleteForeverIcon className="recycleb" />
+                <FolderDeleteTwoToneIcon sx={{ fontSize: 40 }} color="action" className="recycleb" />
             </NavLink>
 
 

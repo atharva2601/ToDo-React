@@ -38,22 +38,22 @@ const Recycle = () => {
     };
 
     return (
-        <div className="main" >
-            <h1 className="head">Deleted Tasks</h1>
+        <div className="recycle" >
+            <h1 className="text">Deleted Tasks</h1>
             {tasks.map((task) => (
             <div>
                 {
                     task.status === 'deleted' && 
-                        <div className="task">
+                        <div className="del">
                             <h5 style={{textDecoration: task.status === 'completed'? "line-through":"none" }}>{task.task}</h5>
-                            <RestorePageIcon onClick={() => handleRestore(task)} />
+                            <RestorePageIcon className="restore" onClick={() => handleRestore(task)} />
                         </div>
                 }
             </div>
             ))}
              
             <NavLink  to={`/main`} replace="true" style={{ textDecoration: 'none',cursor:'pointer'}} activeClassName="selected">
-                <button>Go Back</button>
+                <button className="back" >Go Back</button>
             </NavLink>
         </div>       
     )
